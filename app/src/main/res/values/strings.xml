@@ -6,4 +6,6 @@
     <string name="viewers">viewers</string>
 
     <string name="twitch_api_url_top_games" translatable="false">https://api.twitch.tv/kraken/games/top</string>
+    <string name="twitch_api_url_game_streams" translatable="false">https://api.twitch.tv/kraken/streams?game=%1$s</string>
+    <string name="action_refresh">Refresh</string>
 </resources>

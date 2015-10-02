@@ -8,21 +8,16 @@ public class Game {
     private int giantbombId = 0;
     private int viewersCount = 0;
     private int channelsCount = 0;
+    private String logoURL = "";
     private Bitmap logo;
 
-    public Game(){
-
+    public Game() {
     }
-    public Game(String name) {
+
+    public Game(String name){
         this.name = name;
     }
-
-    public Game(String name, int id, int giantbombId) {
-        this.name = name;
-        this.id = id;
-        this.giantbombId = giantbombId;
-    }
-
+    
     public String getName() {
         return name;
     }
@@ -69,5 +64,26 @@ public class Game {
 
     public void setLogo(Bitmap logo) {
         this.logo = logo;
+    }
+
+    public String getLogoURL() {
+        return logoURL;
+    }
+
+    public void setLogoURL(String logoURL) {
+        this.logoURL = logoURL;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", giantbombId=" + giantbombId +
+                ", viewersCount=" + viewersCount +
+                ", channelsCount=" + channelsCount +
+                ", logoURL='" + logoURL + '\'' +
+                ", logo=" + logo +
+                '}';
     }
 }

@@ -1,11 +1,13 @@
 package com.caykah.android.twitchalt.adapters;
 
 import android.content.Context;
-import android.util.Log;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.caykah.android.twitchalt.R;
@@ -21,9 +23,9 @@ public class GameAdapter extends ArrayAdapter<Game> {
     private ArrayList<Game> data;
 
     public GameAdapter(Context context, ArrayList<Game> data) {
-        super(context, R.layout.list_item_game, data);
+        super(context, R.layout.grid_item_game, data);
         this.context = context;
-        this.resource = R.layout.list_item_game;
+        this.resource = R.layout.grid_item_game;
         this.data = data;
     }
 
@@ -42,16 +44,25 @@ public class GameAdapter extends ArrayAdapter<Game> {
         Game game = data.get(position);
 
         if (game != null) {
-            ((TextView) v.findViewById(R.id.game_name)).setText(game.getName());
+            Bitmap topGameLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.placeholder_game_box);
+            ((TextView) v.findViewById(R.id.top_game_name)).setText(game.getName());
 
             DecimalFormat myFormatter = new DecimalFormat("###,###,###");
 
+            ((TextView) v.findViewById(R.id.top_game_viewers_count)).setText(myFormatter.format(game.getViewersCount()) + " " + context.getResources().getString(R.string.viewers));
 
-            ((TextView) v.findViewById(R.id.viewers_count)).setText(myFormatter.format(game.getViewersCount()) + " " + context.getResources().getString(R.string.viewers));
+            if (game.getLogo() == null) {
+                ((ImageView) v.findViewById(R.id.top_game_logo)).setImageBitmap(topGameLogo);
+            } else {
+                ((ImageView) v.findViewById(R.id.top_game_logo)).setImageBitmap(game.getLogo());
+            }
         }
 
         // the view must be returned to our activity
         return v;
     }
 
+    public Game getItem(int position) {
+        return data.get(position);
+    }
 }

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
+import com.caykah.android.twitchalt.adapters.GameStreamsAdapter;
 import com.caykah.android.twitchalt.adapters.TopGamesAdapter;
 
 import java.io.BufferedInputStream;
@@ -14,11 +15,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class FetchTopGameLogoTask extends AsyncTask<String, Void, Bitmap> {
-    private TopGamesAdapter adapter;
+public class FetchGameStreamPreviewTask extends AsyncTask<String, Void, Bitmap> {
+    private GameStreamsAdapter adapter;
     private int index = 0;
 
-    public FetchTopGameLogoTask(TopGamesAdapter adapter, int index) {
+    public FetchGameStreamPreviewTask(GameStreamsAdapter adapter, int index) {
         this.adapter = adapter;
         this.index = index;
     }
@@ -28,14 +29,14 @@ public class FetchTopGameLogoTask extends AsyncTask<String, Void, Bitmap> {
      */
     @Override
     protected Bitmap doInBackground(String... params) {
-        Bitmap topGameLogo = Bitmap.createBitmap(40, 40, Bitmap.Config.ALPHA_8);
+        Bitmap gameStreamPreview = Bitmap.createBitmap(40, 40, Bitmap.Config.ALPHA_8);
         InputStream in = null;
         try {
             URL url = new URL(params[0]);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
             in = new BufferedInputStream(httpURLConnection.getInputStream());
-            topGameLogo = BitmapFactory.decodeStream(in);
+            gameStreamPreview = BitmapFactory.decodeStream(in);
         } catch (FileNotFoundException fnfe) {
             fnfe.printStackTrace();
         } catch (MalformedURLException e) {
@@ -51,11 +52,11 @@ public class FetchTopGameLogoTask extends AsyncTask<String, Void, Bitmap> {
                 }
             }
         }
-        return topGameLogo;
+        return gameStreamPreview;
     }
 
-    protected void onPostExecute(Bitmap logo) {
-        adapter.getItem(index).setLogo(logo);
+    protected void onPostExecute(Bitmap preview) {
+        adapter.getItem(index).setPreview(preview);
         adapter.notifyDataSetChanged();
     }
 }

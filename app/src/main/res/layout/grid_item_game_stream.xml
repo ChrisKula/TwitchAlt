@@ -11,10 +11,9 @@
         <ImageView
             android:id="@+id/game_stream_preview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
+            android:layout_height="match_parent"
             android:adjustViewBounds="true"
-            android:src="@drawable/placeholder_game_stream_preview" />
+            android:visibility="visible" />
 
         <LinearLayout
             android:layout_width="match_parent"

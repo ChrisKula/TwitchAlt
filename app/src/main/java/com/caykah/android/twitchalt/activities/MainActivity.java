@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        findViewById(R.id.top_games_progress_bar).setVisibility(View.VISIBLE);
         refreshTopGames();
     }
 

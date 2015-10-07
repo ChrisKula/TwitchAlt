@@ -3,10 +3,11 @@ package com.caykah.android.twitchalt.tasks;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.GridView;
 
 import com.caykah.android.twitchalt.R;
-import com.caykah.android.twitchalt.adapters.GameAdapter;
+import com.caykah.android.twitchalt.adapters.TopGamesAdapter;
 import com.caykah.android.twitchalt.pojos.Game;
 
 import org.apache.commons.io.IOUtils;
@@ -87,8 +88,10 @@ public class FetchTopGamesTask extends AsyncTask<String, Void, ArrayList<Game>> 
     }
 
     protected void onPostExecute(ArrayList<Game> games) {
-        GameAdapter adapter = new GameAdapter(activity.getApplicationContext(), games);
+        TopGamesAdapter adapter = new TopGamesAdapter(activity.getApplicationContext(), games);
         gv.setAdapter(adapter);
+
+        activity.findViewById(R.id.top_games_progress_bar).setVisibility(View.INVISIBLE);
 
         for (int i = 0; i < adapter.getCount(); i++) {
             new FetchTopGameLogoTask(adapter, i).execute(adapter.getItem(i).getLogoURL());

@@ -3,13 +3,13 @@ package com.caykah.android.twitchalt.tasks;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.view.View;
 import android.widget.GridView;
 
 import com.caykah.android.twitchalt.R;
-import com.caykah.android.twitchalt.adapters.GameAdapter;
-import com.caykah.android.twitchalt.adapters.GameStreamAdapter;
+import com.caykah.android.twitchalt.adapters.GameStreamsAdapter;
 import com.caykah.android.twitchalt.pojos.Channel;
-import com.caykah.android.twitchalt.pojos.Game;
 import com.caykah.android.twitchalt.pojos.GameStreamObject;
 
 import org.apache.commons.io.IOUtils;
@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -122,11 +121,13 @@ public class FetchGameStreamsTask extends AsyncTask<String, Void, ArrayList<Game
 
 
     protected void onPostExecute(ArrayList<GameStreamObject> gameStreamObjects) {
-        GameStreamAdapter adapter = new GameStreamAdapter(activity.getApplicationContext(), gameStreamObjects);
+        GameStreamsAdapter adapter = new GameStreamsAdapter(activity.getApplicationContext(), gameStreamObjects);
         gv.setAdapter(adapter);
 
-//        for (int i = 0; i < adapter.getCount(); i++) {
-//            new FetchTopGameLogoTask(adapter, i).execute(adapter.getItem(i).getLogoURL());
-//        }
+        activity.findViewById(R.id.game_streams_progress_bar).setVisibility(View.INVISIBLE);
+
+        for (int i = 0; i < adapter.getCount(); i++) {
+            new FetchGameStreamPreviewTask(adapter, i).execute(adapter.getItem(i).getPreviewURL());
+        }
     }
 }

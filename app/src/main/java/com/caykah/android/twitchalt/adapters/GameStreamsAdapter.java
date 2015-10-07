@@ -16,17 +16,20 @@ import com.caykah.android.twitchalt.pojos.GameStreamObject;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class GameStreamAdapter extends ArrayAdapter<GameStreamObject> {
+public class GameStreamsAdapter extends ArrayAdapter<GameStreamObject> {
 
+   private Bitmap previewPlacholeder;
     private Context context;
     private int resource;
     private ArrayList<GameStreamObject> data;
 
-    public GameStreamAdapter(Context context, ArrayList<GameStreamObject> data) {
+    public GameStreamsAdapter(Context context, ArrayList<GameStreamObject> data) {
         super(context, R.layout.grid_item_game_stream, data);
         this.context = context;
         this.resource = R.layout.grid_item_game_stream;
         this.data = data;
+
+       this.previewPlacholeder =  BitmapFactory.decodeResource(context.getResources(), R.drawable.placeholder_game_stream_preview);
     }
 
     @Override
@@ -45,17 +48,14 @@ public class GameStreamAdapter extends ArrayAdapter<GameStreamObject> {
         GameStreamObject gameStreamObject = data.get(position);
 
         if (gameStreamObject != null) {
-            Bitmap gameStreamPreview = BitmapFactory.decodeResource(context.getResources(), R.drawable.placeholder_game_stream_preview);
+            DecimalFormat viewersCountFormatter = new DecimalFormat("###,###,###");
+
             ((TextView) v.findViewById(R.id.game_stream_user_name)).setText(gameStreamObject.getChannel().getDisplayName());
-
             ((TextView) v.findViewById(R.id.game_stream_description)).setText(gameStreamObject.getChannel().getStatus());
-
-            DecimalFormat myFormatter = new DecimalFormat("###,###,###");
-
-            ((TextView) v.findViewById(R.id.game_stream_viewers_count)).setText(myFormatter.format(gameStreamObject.getViewersCount()) + " " + context.getResources().getString(R.string.viewers));
+            ((TextView) v.findViewById(R.id.game_stream_viewers_count)).setText(context.getResources().getString(R.string.viewers, viewersCountFormatter.format(gameStreamObject.getViewersCount())));
 
             if (gameStreamObject.getPreview() == null) {
-                ((ImageView) v.findViewById(R.id.game_stream_preview)).setImageBitmap(gameStreamPreview);
+                ((ImageView) v.findViewById(R.id.game_stream_preview)).setImageBitmap(previewPlacholeder);
             } else {
                 ((ImageView) v.findViewById(R.id.game_stream_preview)).setImageBitmap(gameStreamObject.getPreview());
             }

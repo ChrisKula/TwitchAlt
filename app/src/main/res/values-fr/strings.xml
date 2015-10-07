@@ -4,6 +4,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Paramètres</string>
 
-    <string name="viewers">spectateurs</string>
+    <string name="viewers">%1$s spectateurs</string>
     <string name="action_refresh">Rafraîchir</string>
 </resources>

@@ -6,4 +6,7 @@
 
     <dimen name="font_size_title_game_name">18dp</dimen>
     <dimen name="font_size_title_viewers_count">12dp</dimen>
+
+    <dimen name="grid_horizontal_spacing">10dp</dimen>
+    <dimen name="grid_vertical_spacing">10dp</dimen>
 </resources>

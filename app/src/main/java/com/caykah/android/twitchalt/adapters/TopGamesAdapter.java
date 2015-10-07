@@ -16,17 +16,19 @@ import com.caykah.android.twitchalt.pojos.Game;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class GameAdapter extends ArrayAdapter<Game> {
+public class TopGamesAdapter extends ArrayAdapter<Game> {
 
     private Context context;
     private int resource;
     private ArrayList<Game> data;
+    private Bitmap topGameLogoPlacholder;
 
-    public GameAdapter(Context context, ArrayList<Game> data) {
+    public TopGamesAdapter(Context context, ArrayList<Game> data) {
         super(context, R.layout.grid_item_game, data);
         this.context = context;
         this.resource = R.layout.grid_item_game;
         this.data = data;
+        this.topGameLogoPlacholder = BitmapFactory.decodeResource(context.getResources(), R.drawable.placeholder_game_box);
     }
 
     @Override
@@ -40,24 +42,20 @@ public class GameAdapter extends ArrayAdapter<Game> {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(resource, null);
         }
-
         Game game = data.get(position);
 
         if (game != null) {
-            Bitmap topGameLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.placeholder_game_box);
+            DecimalFormat viewersCountFormatter = new DecimalFormat("###,###,###");
+
             ((TextView) v.findViewById(R.id.top_game_name)).setText(game.getName());
-
-            DecimalFormat myFormatter = new DecimalFormat("###,###,###");
-
-            ((TextView) v.findViewById(R.id.top_game_viewers_count)).setText(myFormatter.format(game.getViewersCount()) + " " + context.getResources().getString(R.string.viewers));
+            ((TextView) v.findViewById(R.id.top_game_viewers_count)).setText(context.getResources().getString(R.string.viewers, viewersCountFormatter.format(game.getViewersCount())));
 
             if (game.getLogo() == null) {
-                ((ImageView) v.findViewById(R.id.top_game_logo)).setImageBitmap(topGameLogo);
+                ((ImageView) v.findViewById(R.id.top_game_logo)).setImageBitmap(topGameLogoPlacholder);
             } else {
                 ((ImageView) v.findViewById(R.id.top_game_logo)).setImageBitmap(game.getLogo());
             }
         }
-
         // the view must be returned to our activity
         return v;
     }

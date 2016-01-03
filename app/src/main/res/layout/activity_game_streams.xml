@@ -9,9 +9,8 @@
         android:id="@+id/game_streams_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminate="true"
         android:layout_gravity="center"
-        />
+        android:indeterminate="true" />
 
     <GridView
         android:id="@+id/grid_game_streams"
@@ -22,8 +21,7 @@
         android:numColumns="auto_fit"
         android:padding="10dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="@dimen/grid_vertical_spacing"
-        />
+        android:verticalSpacing="@dimen/grid_vertical_spacing" />
 
 </FrameLayout>
 

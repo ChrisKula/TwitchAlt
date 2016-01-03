@@ -2,7 +2,9 @@ package com.caykah.android.twitchalt.pojos;
 
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class GameStreamObject {
 
@@ -16,6 +18,14 @@ public class GameStreamObject {
     private Channel channel = new Channel();
     private String previewURL = new String();
     private Bitmap preview;
+
+    private String streamSourceQualityURL;
+    private String streamHighQualityURL;
+    private String streamMediumQualityURL;
+    private String streamLowQualityURL;
+    private String streamMobileQualityURL;
+    private String streamAudioOnlyURL;
+
 
     public long getId() {
         return id;
@@ -95,6 +105,87 @@ public class GameStreamObject {
 
     public void setPreview(Bitmap preview) {
         this.preview = preview;
+    }
+
+    public String getStreamSourceQualityURL() {
+        if (this.streamSourceQualityURL == null) {
+            return getStreamHighQualityURL();
+        } else {
+            return streamSourceQualityURL;
+        }
+    }
+
+    public void setStreamSourceQualityURL(String streamSourceQualityURL) {
+        this.streamSourceQualityURL = streamSourceQualityURL;
+    }
+
+    public String getStreamHighQualityURL() {
+        if (this.streamHighQualityURL == null) {
+            return getStreamMediumQualityURL();
+        } else {
+            return streamHighQualityURL;
+        }
+    }
+
+    public void setStreamHighQualityURL(String streamHighQualityURL) {
+        this.streamHighQualityURL = streamHighQualityURL;
+    }
+
+    public String getStreamMediumQualityURL() {
+        if (this.streamMediumQualityURL == null) {
+            return getStreamLowQualityURL();
+        } else {
+            return streamMediumQualityURL;
+        }
+    }
+
+    public void setStreamMediumQualityURL(String streamMediumQualityURL) {
+        this.streamMediumQualityURL = streamMediumQualityURL;
+    }
+
+    public String getStreamLowQualityURL() {
+        if (this.streamLowQualityURL == null) {
+            return getStreamMobileQualityURL();
+        } else {
+            return streamLowQualityURL;
+        }
+    }
+
+    public void setStreamLowQualityURL(String streamLowQualityURL) {
+        this.streamLowQualityURL = streamLowQualityURL;
+    }
+
+    public String getStreamMobileQualityURL() {
+        if (this.streamMobileQualityURL == null) {
+            return getStreamAudioOnlyURL();
+        } else {
+            return streamSourceQualityURL;
+        }
+    }
+
+    public void setStreamMobileQualityURL(String streamMobileQualityURL) {
+        this.streamMobileQualityURL = streamMobileQualityURL;
+    }
+
+    public String getStreamAudioOnlyURL() {
+        return streamAudioOnlyURL;
+    }
+
+    public void setStreamAudioOnlyURL(String streamAudioOnlyURL) {
+        this.streamAudioOnlyURL = streamAudioOnlyURL;
+    }
+
+    public List<String> getAllStreamURLs() {
+        List<String> urls = new ArrayList<>();
+
+        urls.add(this.streamSourceQualityURL);
+        urls.add(this.streamHighQualityURL);
+        urls.add(this.streamMediumQualityURL);
+        urls.add(this.streamLowQualityURL);
+        urls.add(this.streamMobileQualityURL);
+        urls.add(this.streamAudioOnlyURL);
+
+        return urls;
     }
 
     @Override

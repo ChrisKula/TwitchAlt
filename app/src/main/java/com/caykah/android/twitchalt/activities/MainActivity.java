@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
+                startActivity(new Intent(this, Dummy.class));
                 break;
             case R.id.action_refresh:
                 refreshTopGames();

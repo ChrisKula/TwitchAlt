@@ -5,7 +5,16 @@
     <string name="action_settings">Settings</string>
     <string name="viewers">%1$s viewers</string>
 
+    <string name="action_refresh">Refresh</string>
+
+    <string name="title_activity_stream_player">StreamPlayerActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
     <string name="twitch_api_url_top_games" translatable="false">https://api.twitch.tv/kraken/games/top</string>
     <string name="twitch_api_url_game_streams" translatable="false">https://api.twitch.tv/kraken/streams?game=%1$s&amp;limit=10</string>
-    <string name="action_refresh">Refresh</string>
+    <string name="twitch_api_url_get_access_token" translatable="false">https://api.twitch.tv/api/channels/%1$s/access_token</string>
+    <string name="twitch_api_url_get_m3u8" translatable="false">http://usher.twitch.tv/api/channel/hls/%1$s.m3u8?player=twitchweb&amp;token=%2$s&amp;sig=%3$s&amp;allow_audio_only=true&amp;allow_source=true&amp;type=any&amp;p=%4$d</string>
+
+    <string name="title_activity_dummy">Dummy</string>
 </resources>
